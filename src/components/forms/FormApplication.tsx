@@ -266,6 +266,9 @@ const From = ({
         />
         <div className="flex gap-2">
           <FieldController
+            className={clsx("", {
+              "pointer-events-none opacity-75": form.getValues("category"),
+            })}
             type="select"
             placeholder="category"
             Lable="Category *"

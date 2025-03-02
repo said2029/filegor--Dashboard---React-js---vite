@@ -22,7 +22,7 @@ const ApplicationSchema = z.object({
   subCategory: z.array(z.string().uuid()),
   files: z.any(),
   icon: z.any().optional(),
-  category: z.any(),
+  category: z.string(),
   versions: z.array(versingApplication).optional(),
   versionsIds: z.array(z.string()).optional(),
   images: z.array(z.string()).optional(),

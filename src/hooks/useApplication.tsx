@@ -23,7 +23,7 @@ export default function useApplication(topDownloads?: boolean) {
   const Cookies = useCookies(["authorization"]);
   const ApplicationProvider = new ApplicationClass(Cookies[0].authorization);
 
-  const get_All = async (Filter: FilterType = {}) => {
+  const get_All = async (Filter: FilterType) => {
     const data: Array<ApplicationType> =
       await ApplicationProvider.Get_all(Filter);
     data.map((item) => {
@@ -119,7 +119,7 @@ export default function useApplication(topDownloads?: boolean) {
   };
 
   useEffect(() => {
-    get_All();
+    get_All(Filter);
   }, []);
 
   return {

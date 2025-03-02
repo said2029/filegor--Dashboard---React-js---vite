@@ -15,7 +15,7 @@ function Application() {
     setFilter,
     filter,
     restartFilter,
-  } = useApplication();
+  } = useApplication(false);
 
   const { SubCategorys } = useSubCategory({ perPage: 10 });
   const { Categorys } = useCategory();
