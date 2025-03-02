@@ -28,17 +28,13 @@ export default function useApplication(topDownloads?: boolean) {
       await ApplicationProvider.Get_all(Filter);
     data.map((item) => {
       if (item.images != null) {
-        item.images = item.images?.map((img: string) =>
-          img.includes("http")
-            ? img
-            : `${import.meta.env.VITE_BACKENDURL}/upload${img}`,
+        item.images = item.images?.map(
+          (img: string) => `${import.meta.env.VITE_BACKENDURL}/upload${img}`,
         );
       }
       if (item.icon) {
         item.images?.unshift(
-          item.icon.includes("http")
-            ? item.icon
-            : `${import.meta.env.VITE_BACKENDURL}/upload${item.icon}`,
+          `${import.meta.env.VITE_BACKENDURL}/upload${item.icon}`,
         );
       }
       item.files = item.images ?? [];
@@ -53,10 +49,13 @@ export default function useApplication(topDownloads?: boolean) {
         return res;
       }
       if (res.images != null) {
-        res.images = res.images?.map((img: string) =>
-          img.startsWith("http")
-            ? img
-            : `${import.meta.env.VITE_BACKENDURL}/upload${img}`,
+        res.images = res.images?.map(
+          (img: string) => `${import.meta.env.VITE_BACKENDURL}/upload${img}`,
+        );
+      }
+      if (res.icon) {
+        res.images?.unshift(
+          `${import.meta.env.VITE_BACKENDURL}/upload${res.icon}`,
         );
       }
       setApplications((pre) => [res, ...pre]);
@@ -67,16 +66,12 @@ export default function useApplication(topDownloads?: boolean) {
   const update = async (id: string, body: FormData) => {
     return await ApplicationProvider.update(id, body).then((res) => {
       if (res.images != null) {
-        res.images = res.images?.map((img: string) =>
-          img.startsWith("http")
-            ? img
-            : `${import.meta.env.VITE_BACKENDURL}/upload${img}`,
+        res.images = res.images?.map(
+          (img: string) => `${import.meta.env.VITE_BACKENDURL}/upload${img}`,
         );
         if (res.icon) {
           res.images?.unshift(
-            res.icon.startsWith("http")
-              ? res.icon
-              : `${import.meta.env.VITE_BACKENDURL}/upload${res.icon}`,
+            `${import.meta.env.VITE_BACKENDURL}/upload${res.icon}`,
           );
         }
       }
